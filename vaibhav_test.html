@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scrollable Content Demo</title>
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <!-- jQuery Mobile styles -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+   
+    <style type="text/css">
+        div.scrollmenu {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+    background-color: #777;
+}
+    </style>
+    <!-- Fix for scrolling on iOS prior to iOS 6 -->
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+ 
+        div#container {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+        }
+ 
+        div[data-role="header"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+ 
+        div[data-role="content"] {
+            position: absolute;
+            top: 41px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+ 
+        .scrollable {
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+ 
+            /* iOS specific fix, don't use it on Android devices */
+        .scrollable > * {
+            -webkit-transform: translateZ(0px);
+        }
+    </style>
+ 
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <SCRIPT language="javascript">
+        function addRow(tableID,address) {
+
+            var table = document.getElementById(tableID);
+
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+
+            var cell1 = row.insertCell(0);
+            var element1 = document.createElement("img");
+            element1.setAttribute("src", "dumm1.jpg");
+            element1.setAttribute("height", "40%");
+            element1.setAttribute("width", "40%");
+            cell1.appendChild(element1);
+
+            var cell2 = row.insertCell(1);
+            var element3 = document.createElement("h4");
+            element3.innerHTML=address;
+            var element5 = document.createElement("h5");
+            element5.innerHTML="Name";
+            var element4 = document.createElement("h6");
+            element4.innerHTML="speciality";
+            cell2.appendChild(element5);
+            cell2.appendChild(element3);
+            cell2.appendChild(element4);
+
+            var cell3 = row.insertCell(2);
+            var element2 = document.createElement("a");
+            element2.setAttribute("src", "#");
+            element2.setAttribute("class","glyphicon glyphicon-menu-right");
+            //element2.innerHTML="arrow sign";
+            cell3.appendChild(element2);
+
+
+        }
+
+        function deleteRow(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+
+
+            }
+            }catch(e) {
+                alert(e);
+            }
+        }
+
+    </SCRIPT>
+
+
+   <script type="text/javascript">
+   $(document).ready(function(){
+
+ $("#final_sub").click(function(){
+    alert("JS code.");
+    //var pass=document.getElementById("code").value;
+    //var email=localStorage.getItem("login_id");
+//var jsonData = {"userId":email,"verificationCode":pass,"candidateId" : "57f27a0fa8543053617a9480",
+  // "votingPhase" :"1"}
+;
+  // var jsonData = '{"password':/"test/",/"userId/":/"vote/"}'
+   $.ajax({
+     url:"https://api.omnivore.io/0.1/locations",
+     //data: JSON.stringify(jsonData),
+   headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+         'Api-Key':'c5fb5a0d04c946f59f0bea7df7c18565'
+    },
+     type:'GET',
+     crossDomain:true,
+     dataType:'json',   
+     success:function(data)
+     {
+        var rec = data;
+        var counter = rec["count"]
+        for(i=0;i<counter;i++)
+        {
+            var nest_j = rec[i];
+            var add_j = rec['address'];
+            //var add_is = add_j['city'] + add_j['country'] + add_j['state'] +add_j['state1'] +add_j['zip'];
+            var add_is=''
+            for (var j in add_is)
+            {
+                add_is = add_is + ' ' +j;
+            }
+            add_is = add_is+"none"
+            addRow('dataTable',add_is);
+        }
+        /*if (rec["status"] ==1)
+        {
+              //localStorage.setItem("login_id", email);
+              window.location.href="submitted_vote.html";
+        }
+        else if (rec["status"] ==0)
+        {
+         alert("Invalid Passcode. Refer to your email.");
+        }
+        else if (rec["status"] ==2)
+        {
+         alert("You have already voted for this party.");
+         window.location.href="show_trump.html";
+        }*/
+     },
+     error:function(jqXHR,textStatus,errorThrown)
+     {
+        alert("Invalid Passcode. Refer to your email.");
+     }
+    });
+                 });
+  }); 
+</script>
+
+
+    <script type="text/javascript">
+        $(document).one('mobileinit', function () {
+ 
+            // Setting #container div as a jqm pageContainer
+            $.mobile.pageContainer = $('#container');
+ 
+            // Setting default page transition to slide
+            $.mobile.defaultPageTransition = 'slide';
+ 
+        });
+    </script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+ 
+</head>
+<body>
+<div class='row'>
+    <div class='col-md-12'> <h3 style='text-align: center;background-color: #F3EEED;color:black'>Restaurants</h3></div>
+</div>
+<!--INPUT type="button" value="Add Row" onclick="addRow('dataTable','nakli address h re')" /-->
+        <TABLE id="dataTable" data-role="listview" >
+            <TR boder="1" >
+                
+                <TD style="margin-right:-1px;margin-left:-1px"> <img src="dumm1.jpg" style="width:40%;height:40%;padding:0%;margin-left: 0px;margin-right: 0px" alt="Smiley face" ></TD>
+                <TD style="margin:-1px "><h3>Name</h3>
+                    <h5>Address</h5>
+                    <h6>speciality</h6></TD>
+                    <TD><a href="#" class="glyphicon glyphicon-menu-right"></a></TD>
+            </TR>
+        </TABLE>
+        </div>
+    </div>
+<button type="button" value="Add Row" id="final_sub">Test</button> 
+<div class="row">
+<div class="scrollmenu">
+  <a href="#" style="color:white;margin-left:50px">Restaurant</a>
+  <a href="#" style="color:white;margin-left:30px">Status</a>
+  <a href="#" style="color:white;margin-left:30px">Profile</a>
+
+ 
+</div>
+
+</div>
+
+</body>
+</html>

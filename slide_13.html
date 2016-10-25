@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!--link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" style="width:30%;height:15%;padding:0%;margin-left: 0px;margin-right: 0px"-->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+  <script type='text/javascript' src="js/jquery.mycart.js"></script> 
+    <!-- jQuery Mobile styles -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <!--script type="text/javascript">
+  $(function () {
+
+    var goToCartIcon = function($addTocartBtn){
+      var $cartIcon = $(".my-cart-icon");
+      var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
+      $addTocartBtn.prepend($image);
+      var position = $cartIcon.position();
+      $image.animate({
+        top: position.top,
+        left: position.left
+      }, 500 , "linear", function() {
+        $image.remove();
+      });
+    }
+
+    $('.my-cart-btn').myCart({
+      classCartIcon: 'my-cart-icon',
+      classCartBadge: 'my-cart-badge',
+      classProductQuantity: 'my-product-quantity',
+      classProductRemove: 'my-product-remove',
+      classCheckoutCart: 'my-cart-checkout',
+      affixCartIcon: true,
+      showCheckoutModal: true,
+      cartItems: [
+        
+      ],
+      clickOnAddToCart: function($addTocart){
+        goToCartIcon($addTocart);
+      },
+      clickOnCartIcon: function($cartIcon, products, totalPrice, totalQuantity) {
+        console.log("cart icon clicked", $cartIcon, products, totalPrice, totalQuantity);
+      },
+      checkoutCart: function(products, totalPrice, totalQuantity) {
+        console.log("checking out", products, totalPrice, totalQuantity);
+      },
+      getDiscountPrice: function(products, totalPrice, totalQuantity) {
+        console.log("calculating discount", products, totalPrice, totalQuantity);
+        return totalPrice * 0.5;
+      }
+    });
+
+  });
+  </script-->
+
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+ <style>
+  .badge-notify{
+    background:red;
+    position:relative;
+    top: -20px;
+    right: 10px;
+  }
+  .my-cart-icon-affix {
+    position: fixed;
+    z-index: 999;
+  }
+  </style>
+
+   <script type="text/javascript">
+   $(document).ready(function(){
+
+ $("#final_sub").click(function(){
+    alert("JS code.");
+    //var pass=document.getElementById("code").value;
+    //var email=localStorage.getItem("login_id");
+//var jsonData = {"userId":email,"verificationCode":pass,"candidateId" : "57f27a0fa8543053617a9480",
+  // "votingPhase" :"1"}
+;
+  // var jsonData = '{"password':/"test/",/"userId/":/"vote/"}'
+   $.ajax({
+     url:"https://api.omnivore.io/0.1/locations",
+     //data: JSON.stringify(jsonData),
+   headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+         'Api-Key':'c5fb5a0d04c946f59f0bea7df7c18565'
+    },
+     type:'GET',
+     crossDomain:true,
+     dataType:'json',   
+     success:function(data)
+     {
+        var rec = data;
+        var counter = rec["count"]
+        for(i=0;i<counter;i++)
+        {
+            var nest_j = rec[i];
+            var add_j = rec['address'];
+            //var add_is = add_j['city'] + add_j['country'] + add_j['state'] +add_j['state1'] +add_j['zip'];
+            var add_is=''
+            for (var j in add_is)
+            {
+                add_is = add_is + ' ' +j;
+            }
+            add_is = add_is+"none"
+            addRow('dataTable',add_is);
+        }
+        /*if (rec["status"] ==1)
+        {
+              //localStorage.setItem("login_id", email);
+              window.location.href="submitted_vote.html";
+        }
+        else if (rec["status"] ==0)
+        {
+         alert("Invalid Passcode. Refer to your email.");
+        }
+        else if (rec["status"] ==2)
+        {
+         alert("You have already voted for this party.");
+         window.location.href="show_trump.html";
+        }*/
+     },
+     error:function(jqXHR,textStatus,errorThrown)
+     {
+        alert("Invalid Passcode. Refer to your email.");
+     }
+    });
+                 });
+  }); 
+</script>
+
+
+
+<style type="text/css">
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    height: 20px;
+    background: #f0f0f0;
+    width: 100%;
+  }
+ h2 { 
+   position: absolute; 
+   top: 0.01%; 
+   left: 0; 
+   width: 100%; 
+    }
+    h2 span { 
+   color: white; 
+   font: bold 24px/45px Helvetica, Sans-Serif; 
+   letter-spacing: -1px;  
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.1);
+   padding: 10px; 
+}
+h2 span.spacer {
+   padding:0 5px;
+}
+    </style>
+    <script type="text/javascript">
+        $(function() {
+    
+    $("h2")
+        .wrapInner("<span>")
+
+    $("h2 br")
+        .before("<span class='spacer'>")
+        .after("<span class='spacer'>");
+
+});
+    </script>
+    <style type="text/css">
+        div.scrollmenu {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+    background-color: #777;
+}
+    </style>
+    <SCRIPT language="javascript">
+        function addRow(tableID) {
+
+            var table = document.getElementById(tableID);
+
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+
+            var cell1 = row.insertCell(0);
+            var element1 = document.createElement("img");
+            element1.setAttribute("src", "dumm2.jpg"); 
+            element1.setAttribute("class", "img-responsive");style="height:10%;width:50%;margin-left:30px"
+            //element1.setAttribute("width", "40%");
+            element1.style.height="10%";
+            element1.style.width="50%";
+            element1.style.marginLeft="30px";
+            cell1.appendChild(element1);
+
+            var  cell2= row.insertCell(1);
+            var element3 = document.createElement("p");
+            element3.innerHTML="New_food";
+            var element5 = document.createElement("h5");
+            element5.innerHTML="New_food";
+            //var element4 = document.createElement("h6");
+            //element4.innerHTML="speciality";
+            cell2.appendChild(element5);
+            cell2.appendChild(element3);
+            //cell2.appendChild(element4);
+
+            var cell3 = row.insertCell(2);
+            var element2 = document.createElement("button");
+            var element8 = document.createElement("h6");
+            element8.innerHTML="10";
+            element8.style.marginLeft="40px";
+            element2.style.marginLeft="40px";
+            element2.setAttribute("class","btn btn-danger my-cart-btn");
+            element2.setAttribute("id","vai");
+            /*element2.setAttribute("data-id","2");
+            element2.setAttribute("data-name","New_food");
+            element2.setAttribute("data-summary","Descriptiom_new");
+            element2.setAttribute("data-quantity","1");
+            element2.setAttribute("data-price","10");
+            element2.setAttribute("data-image","dumm2.jpg");*/
+            element2.dataset.id="2";
+            element2.dataset.name="New_food";
+            element2.dataset.summary="just anoather disccrip";
+            element2.dataset.quantity="1";
+            element2.dataset.price="10";
+            element2.dataset.image="dumm2.jpg";
+            //element2.setAttribute("border-color","green");
+            //element2.setAttribute("background-color","#ffffff");
+            //element2.setAttribute("color","green");
+            element2.innerHTML="ADD";
+            cell3.appendChild(element8);
+            cell3.appendChild(element2);
+
+
+
+        }</SCRIPT>
+        <script type="text/javascript">
+            function myFunction()
+            {
+                var arr = new Array();
+                localStorage.clear();
+                var temp= {id:1,name:'chitrank',summary:'chu',price:10,quantity:1,image:"dumm2.jpg"};
+                arr.push(temp)
+                localStorage.setItem("items", JSON.stringify(arr));
+            }
+        </script>
+</head>
+<body class="container" onload="myFunction()">
+<div class="row">
+<div class="image">
+
+      <img src="dumm2.jpg" class="img-responsive" alt="" />
+      
+      <h2> <span>Arrow</span></h2>
+      <h2 style="top:10%"> <span>Name of restrau</span></h2>
+      <h2 style="top:15%"> <span>Address of it</span></h2>
+</div>
+</div>
+<div class="row">
+<div class="scrollmenu">
+  <a href="#home">Sandwhiches</a>
+  <a href="#news">Soups</a>
+  <a href="#contact">Salads</a>
+  <a href="#about">Daily Specials</a>
+ 
+</div>
+
+</div>
+<div data-role="content" class="scrollable">
+<INPUT type="button" value="Add Row" onclick="addRow('dataTable')">
+        <table id="dataTable" data-role="listview" style="border-spacing: 0px;border-collapse: collapse;padding:0% ">
+              <col width="130">
+            <col width="80">
+            <tr  >
+                
+                <td style="margin:-1px"> <img src="dumm2.jpg"  class="img-responsive" style="height:10%;width:50%;margin-left:30px" alt="Smiley face" ></td>
+                <td style="margin-left:-25px">
+                    <h5>Food1</h5>
+                    <p>Descriptiom</p>
+                    </td>
+                    <td>
+                    <h6 style="margin-left: 40px"><strong>$50</strong></h6>
+                    <button class="btn btn-danger my-cart-btn" data-id="1" id="vai" data-name="Food1" data-summary="Description" data-price="50" data-quantity="1" data-image="dumm2.jpg" style="margin-left: 40px">ADD</button></td>
+            </tr>
+            <!--button class="btn btn-danger my-cart-btn" data-id="3" data-name="Food1" data-summary="Description" data-price="50" data-quantity="1" data-image="dumm2.jpg" style="margin-left: 40px">ADD</button-->
+        </table>
+</div>
+<div class="footer row"> 
+
+    <div class="col-sm-4 col-xs-6"><!--h3>Cart INFO</h3-->
+        <span class="glyphicon glyphicon-shopping-cart my-cart-icon"><span class="badge badge-notify my-cart-badge"></span></span>
+    </div>
+    <div class="col-sm-4 col-xs-6" style="background:black"></div>
+    <div class="col-sm-4 col-xs-6" style="background:black"><h3 style="text-align: right">Check out</h3></div>
+</div> 
+  <script type="text/javascript">
+ $(document).on('click', '.my-cart-btn', function(){ 
+      var cart_check = JSON.parse(localStorage.getItem("items"));
+      var img_ref = $(this).data('image');
+      var quant = $(this).data('quantity');
+      var cust_price = $(this).data('price');
+      var summ = $(this).data('summary');
+      var m_name = $(this).data('name');
+      var my_id =  $(this).data('id');
+      var myjson = {id:my_id,name:m_name,summary:summ,price:cust_price,quantity:quant,image:img_ref};
+      cart_check.push(myjson);
+      localStorage.setItem("items", JSON.stringify(cart_check));
+      $('.my-cart-btn').myCart({
+      classCartIcon: 'my-cart-icon',
+      classCartBadge: 'my-cart-badge',
+      classProductQuantity: 'my-product-quantity',
+      classProductRemove: 'my-product-remove',
+      classCheckoutCart: 'my-cart-checkout',
+      affixCartIcon: true,
+      showCheckoutModal: true,
+      cartItems: cart_check,
+      clickOnAddToCart: function($addTocart){
+        
+        goToCartIcon($addTocart);
+      },
+      clickOnCartIcon: function($cartIcon, products, totalPrice, totalQuantity) {
+        console.log("cart icon clicked", $cartIcon, products, totalPrice, totalQuantity);
+      },
+      checkoutCart: function(products, totalPrice, totalQuantity) {
+        console.log("checking out", products, totalPrice, totalQuantity);
+      },
+      getDiscountPrice: function(products, totalPrice, totalQuantity) {
+        console.log("calculating discount", products, totalPrice, totalQuantity);
+        return totalPrice * 0.5;
+      }
+    });
+   var goToCartIcon = function($addTocartBtn){
+        alert('Pejhla kaam');
+      var $cartIcon = $(".my-cart-icon");
+      var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
+      $addTocartBtn.prepend($image);
+      var position = $cartIcon.position();
+      $image.animate({
+        top: position.top,
+        left: position.left
+      }, 500 , "linear", function() {
+        $image.remove();
+      });
+    }
+
+
+});
+
+  </script>
+
+
+</body>
+</html>
