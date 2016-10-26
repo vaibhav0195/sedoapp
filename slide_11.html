@@ -2,74 +2,23 @@
 <html>
 <head>
     <title>Scrollable Content Demo</title>
-    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
- 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!--link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" style="width:30%;height:15%;padding:0%;margin-left: 0px;margin-right: 0px"-->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+  <script type='text/javascript' src="js/jquery.mycart.js"></script> 
     <!-- jQuery Mobile styles -->
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-   
-    <style type="text/css">
-        div.scrollmenu {
-    background-color: #333;
-    overflow: auto;
-    white-space: nowrap;
-}
-
-div.scrollmenu a {
-    display: inline-block;
-    color: white;
-    text-align: center;
-    padding: 14px;
-    text-decoration: none;
-}
-
-div.scrollmenu a:hover {
-    background-color: #777;
-}
-    </style>
     <!-- Fix for scrolling on iOS prior to iOS 6 -->
-    <style type="text/css">
-        body {
-            margin: 0;
-        }
- 
-        div#container {
-            position: absolute;
-            width: 100%;
-            top: 0;
-            bottom: 0;
-        }
- 
-        div[data-role="header"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-        }
- 
-        div[data-role="content"] {
-            position: absolute;
-            top: 41px;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
- 
-        .scrollable {
-            overflow-y: scroll;
-            -webkit-overflow-scrolling: touch;
-        }
- 
-            /* iOS specific fix, don't use it on Android devices */
-        .scrollable > * {
-            -webkit-transform: translateZ(0px);
-        }
-    </style>
+    
  
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <SCRIPT language="javascript">
@@ -208,36 +157,89 @@ div.scrollmenu a:hover {
         });
     </script>
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<script type="text/javascript">
+    function tip_calc(price)
+    {
+        var myval = document.getElementById('amount').value;
+        var final_add = parseFloat(myval)+price;
+        document.getElementById('show_paisa').innerHTML=final_add
+    }
+
+</script>
+
+
  
 </head>
-<body>
+<body class="container">
+<div class="container">
 <div class='row'>
     <div class='col-md-12'> <h3 style='text-align: center;background-color: #F3EEED;color:black'>Restaurants</h3></div>
 </div>
-<!--INPUT type="button" value="Add Row" onclick="addRow('dataTable','nakli address h re')" /-->
-        <TABLE id="dataTable" data-role="listview" >
-            <TR boder="1" >
-                
-                <TD style="margin-right:-1px;margin-left:-1px"> <img src="dumm1.jpg" style="width:40%;height:40%;padding:0%;margin-left: 0px;margin-right: 0px" alt="Smiley face" ></TD>
-                <TD style="margin:-1px "><h3>Name</h3>
-                    <h5>Address</h5>
-                    <h6>speciality</h6></TD>
-                    <TD><a href="#" class="glyphicon glyphicon-menu-right"></a></TD>
-            </TR>
-        </TABLE>
-        </div>
+   <div class = "row">
+    
+    <div class="col-md-12" style="margin-top: 50px;">
+        
+        <input type="passowrd" class="form-control" id="OrderId" placeholder="OrderId">
     </div>
-<button type="button" value="Add Row" id="final_sub">Test</button> 
-<div class="row">
-<div class="scrollmenu">
-  <a href="#" style="color:white;margin-left:50px">Restaurant</a>
-  <a href="#" style="color:white;margin-left:30px">Status</a>
-  <a href="#" style="color:white;margin-left:30px">Profile</a>
-
+    
+   </div>
+   <div class = "row">
+    
+    <div class="col-md-12" style="margin-top: 50px;">
+        
+        <input type="passowrd" class="form-control" id="TotalAmout" placeholder="Total amount" id="amount">
+    </div>
+    
+   </div>
+      <div class = "row">
+    
+    <div class="col-md-4">
+        
+        <h6  style="text-align: left;margin-top:20px;padding: 0px;margin-left: 0px;margin-right: 0px" >Total Amount</h6>
+    </div>
+        <div class="col-d-4"></div>
+    <div class="col-md-4" style="text-align: right" id="show_paisa">
+    <h6 >Paisa!</h6>
+    </div>
+        
+   </div>
+   <table style="width:100%;" border="1">
+  <tr>
+    
  
-</div>
+    <td>No tip</td>
+    <td onclick="tip_calc(12)">12%</td> 
+    <td onclick="tip_calc(15)">15%</td>
+  
+    <td onclick="tip_calc(18)"> 18%</td>
+    <td onclick="tip_calc(20)">20%</td>
 
+  </tr>
+</table>
+    <div class="row">
+        <div class="col-md-4">
+            <p >Tax</p>
+        </div>
+        <div class="col-md-4">
+            <p style="text-align:right">$2</p>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <p >Total</p>
+        </div>
+        <div class="col-md-4">
+            <p style="text-align:right">$2</p>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+<div class="col-md-12 img-responsive" style="margin-top: 20px;">
+    <button type = "button" id="my_btn" style="color:white;background-color:#b5252e;font-weight:bold;font-size:14px;padding-top: 5px; padding-bottom: 20px; border-top-width: 10px; border-bottom-width: 10px;border-color:#b5252e;" class = "btn  btn-lg form-control color:white;background-color:red">
+      Make Payment
+   </button>
+   <!--input type="submit"  value=" Create Account " style="color:white;background-color:red;" class = "btn  btn-lg form-control"-->
+   </div>
 </div>
-
 </body>
 </html>

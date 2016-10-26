@@ -114,6 +114,7 @@
             }
             add_is = add_is+"none"
             addRow('dataTable',add_is);
+            addRow(tableID,food_name,price_me)
         }
         /*if (rec["status"] ==1)
         {
@@ -200,7 +201,7 @@ div.scrollmenu a:hover {
 }
     </style>
     <SCRIPT language="javascript">
-        function addRow(tableID) {
+        function addRow(tableID,food_name,price_me,i) {
 
             var table = document.getElementById(tableID);
 
@@ -219,9 +220,9 @@ div.scrollmenu a:hover {
 
             var  cell2= row.insertCell(1);
             var element3 = document.createElement("p");
-            element3.innerHTML="New_food";
+            element3.innerHTML=food_name;
             var element5 = document.createElement("h5");
-            element5.innerHTML="New_food";
+            element5.innerHTML=food_name;
             //var element4 = document.createElement("h6");
             //element4.innerHTML="speciality";
             cell2.appendChild(element5);
@@ -231,7 +232,7 @@ div.scrollmenu a:hover {
             var cell3 = row.insertCell(2);
             var element2 = document.createElement("button");
             var element8 = document.createElement("h6");
-            element8.innerHTML="10";
+            element8.innerHTML=price_me;
             element8.style.marginLeft="40px";
             element2.style.marginLeft="40px";
             element2.setAttribute("class","btn btn-danger my-cart-btn");
@@ -242,11 +243,11 @@ div.scrollmenu a:hover {
             element2.setAttribute("data-quantity","1");
             element2.setAttribute("data-price","10");
             element2.setAttribute("data-image","dumm2.jpg");*/
-            element2.dataset.id="2";
-            element2.dataset.name="New_food";
+            element2.dataset.id=i;
+            element2.dataset.name=food_name;
             element2.dataset.summary="just anoather disccrip";
             element2.dataset.quantity="1";
-            element2.dataset.price="10";
+            element2.dataset.price=price_me;
             element2.dataset.image="dumm2.jpg";
             //element2.setAttribute("border-color","green");
             //element2.setAttribute("background-color","#ffffff");
@@ -262,10 +263,79 @@ div.scrollmenu a:hover {
             function myFunction()
             {
                 var arr = new Array();
+                var arr2 = new Array();
                 localStorage.clear();
-                var temp= {id:1,name:'chitrank',summary:'chu',price:10,quantity:1,image:"dumm2.jpg"};
+                var temp= {id:13,name:'chitrank',summary:'chu',price:10,quantity:1,image:"dumm2.jpg"};
                 arr.push(temp)
+                var temp_new = {"ids":"name"}
+                arr2.push(temp_new)
                 localStorage.setItem("items", JSON.stringify(arr));
+                localStorage.setItem("ids",JSON.stringify(arr2));
+                load_the_list()
+            }
+            function load_the_list()
+            {
+                   $.ajax({
+     url:"https://api.omnivore.io/0.1/locations/GTzLqzMT/menu/categories",
+     //data: JSON.stringify(jsonData),
+   headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+         'Api-Key':'c5fb5a0d04c946f59f0bea7df7c18565'
+    },
+     type:'GET',
+     crossDomain:true,
+     dataType:'json',   
+     success:function(data)
+     {
+        var rec = data;
+        var counter = rec["count"]
+        var temp = rec['_embedded']
+        var get_cat = temp['categories']
+        for(i=0;i<counter;i++)
+        {
+            var temp_json = get_cat[i]
+            var id = temp_json['id']
+            var name_is = temp_json['name']
+            var add_idt = JSON.parse(localStorage.getItem("ids"));
+            var myjson = {ids:id,name:name_is};
+            add_idt.push(myjson);
+            localStorage.setItem("items", JSON.stringify(add_idt));
+            console.log('chala re',name_is);
+            document.getElementById("pos"+(i+1).toString()).innerHTML = name_is;
+        }
+        var elem1_json = get_cat[0]
+        var em = elem1_json['_embedded']
+        var items_in = em['items']
+        for (i =0;i<items_in.length;i++)
+        {
+            var temp_json = items_in[i]
+            var name_is = temp_json['name']
+            var price = temp_json['price']
+            console.log('chala re2',name_is,price,i);
+            addRow('dataTable',name_is,price.toString(),i.toString())
+
+        } 
+        /*if (rec["status"] ==1)
+        {
+              //localStorage.setItem("login_id", email);
+              window.location.href="submitted_vote.html";
+        }
+        else if (rec["status"] ==0)
+        {
+         alert("Invalid Passcode. Refer to your email.");
+        }
+        else if (rec["status"] ==2)
+        {
+         alert("You have already voted for this party.");
+         window.location.href="show_trump.html";
+        }*/
+     },
+     error:function(jqXHR,textStatus,errorThrown)
+     {
+        alert("Invalid Passcode. Refer to your email.");
+     }
+    });
             }
         </script>
 </head>
@@ -282,20 +352,19 @@ div.scrollmenu a:hover {
 </div>
 <div class="row">
 <div class="scrollmenu">
-  <a href="#home">Sandwhiches</a>
-  <a href="#news">Soups</a>
-  <a href="#contact">Salads</a>
-  <a href="#about">Daily Specials</a>
+  <a href="#home" ><p id="pos1">Sandwhiches</p></a>
+  <a href="#news" > <p id="pos2"> Soups</p></a>
+  <a href="#contact" ><p id="pos3"> Salads</p></a>
  
 </div>
 
 </div>
 <div data-role="content" class="scrollable">
-<INPUT type="button" value="Add Row" onclick="addRow('dataTable')">
+<!--INPUT type="button" value="Add Row" onclick="addRow('dataTable')"-->
         <table id="dataTable" data-role="listview" style="border-spacing: 0px;border-collapse: collapse;padding:0% ">
               <col width="130">
             <col width="80">
-            <tr  >
+            <!--tr  >
                 
                 <td style="margin:-1px"> <img src="dumm2.jpg"  class="img-responsive" style="height:10%;width:50%;margin-left:30px" alt="Smiley face" ></td>
                 <td style="margin-left:-25px">
@@ -305,7 +374,7 @@ div.scrollmenu a:hover {
                     <td>
                     <h6 style="margin-left: 40px"><strong>$50</strong></h6>
                     <button class="btn btn-danger my-cart-btn" data-id="1" id="vai" data-name="Food1" data-summary="Description" data-price="50" data-quantity="1" data-image="dumm2.jpg" style="margin-left: 40px">ADD</button></td>
-            </tr>
+            </tr-->
             <!--button class="btn btn-danger my-cart-btn" data-id="3" data-name="Food1" data-summary="Description" data-price="50" data-quantity="1" data-image="dumm2.jpg" style="margin-left: 40px">ADD</button-->
         </table>
 </div>
