@@ -75,7 +75,7 @@ div.scrollmenu a:hover {
  
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <SCRIPT language="javascript">
-        function addRow(tableID,address) {
+        function addRow(tableID,address,name_disp,owner) {
 
             var table = document.getElementById(tableID);
 
@@ -93,9 +93,9 @@ div.scrollmenu a:hover {
             var element3 = document.createElement("h4");
             element3.innerHTML=address;
             var element5 = document.createElement("h5");
-            element5.innerHTML="Name";
+            element5.innerHTML=name_disp;
             var element4 = document.createElement("h6");
-            element4.innerHTML="speciality";
+            element4.innerHTML=owner;
             cell2.appendChild(element5);
             cell2.appendChild(element3);
             cell2.appendChild(element4);
@@ -162,10 +162,17 @@ div.scrollmenu a:hover {
      {
         var rec = data;
         var counter = rec["count"]
+        var embj = rec["_embedded"]
+        var locj = embj["locations"]
+        console.log('eme',embj)
+        console.log('data is',locj);
+        
         for(i=0;i<counter;i++)
         {
-            var nest_j = rec[i];
-            var add_j = rec['address'];
+            var nest_j = locj[i];
+            var add_j = nest_j['address'];
+            var name_disp = nest_j['display_name'];
+            var owner = nest_j['owner'];
             //var add_is = add_j['city'] + add_j['country'] + add_j['state'] +add_j['state1'] +add_j['zip'];
             var add_is=''
             for (var j in add_is)
@@ -173,7 +180,8 @@ div.scrollmenu a:hover {
                 add_is = add_is + ' ' +j;
             }
             add_is = add_is+"none"
-            addRow('dataTable',add_is);
+            console.log(add_is)
+            addRow('dataTable',add_is,owner,name_disp);
         }
         /*if (rec["status"] ==1)
         {

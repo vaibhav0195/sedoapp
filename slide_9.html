@@ -208,7 +208,15 @@ div.scrollmenu a:hover {
         });
     </script>
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
- 
+ <script type="text/javascript">
+     function save_and_go()
+     {
+        var save_order_id = document.getElementById('OrderId').value;
+        console.log('save_id',save_order_id);
+        localStorage.setItem("save_order_id", save_order_id);
+        window.location.href='slide_11.html'
+     }
+ </script>
 </head>
 <body>
 <div class='row'>
@@ -223,8 +231,8 @@ div.scrollmenu a:hover {
     
    </div>
 <div class="col-md-12 img-responsive" style="margin-top: 20px;">
-    <button type = "button" id="my_btn" style="color:white;background-color:#b5252e;font-weight:bold;font-size:14px;padding-top: 5px; padding-bottom: 20px; border-top-width: 10px; border-bottom-width: 10px;border-color:#b5252e;" class = "btn  btn-lg form-control color:white;background-color:red">
-      LOGIN
+    <button type = "button"  style="color:white;background-color:#b5252e;font-weight:bold;font-size:14px;padding-top: 5px; padding-bottom: 20px; border-top-width: 10px; border-bottom-width: 10px;border-color:#b5252e;" class = "btn  btn-lg form-control color:white;background-color:red" onclick="save_and_go()">
+      Pay
    </button>
    <!--input type="submit"  value=" Create Account " style="color:white;background-color:red;" class = "btn  btn-lg form-control"-->
    </div>
