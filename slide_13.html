@@ -260,6 +260,78 @@ div.scrollmenu a:hover {
 
         }</SCRIPT>
         <script type="text/javascript">
+            function load_the_inside_menu(number)
+            {
+                /*var arr = new Array();
+                var arr2 = new Array();
+                localStorage.clear();
+                var temp= {id:13,name:'chitrank',summary:'chu',price:10,quantity:1,image:"dumm2.jpg"};
+                arr.push(temp)
+                var temp_new = {"ids":"name"}
+                arr2.push(temp_new)
+                localStorage.setItem("items", JSON.stringify(arr));
+                localStorage.setItem("ids",JSON.stringify(arr2));*/
+                var num_rows = document.getElementById("dataTable").rows.length;
+                for (i=0;i<num_rows;i++)
+                {
+                    document.getElementById("dataTable").deleteRow(i);
+                }
+                load_the_inside_list(number)
+            }
+            function load_the_inside_list(num_in)
+            {
+                   $.ajax({
+     url:"https://api.omnivore.io/0.1/locations/GTzLqzMT/menu/categories",
+     //data: JSON.stringify(jsonData),
+   headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+         'Api-Key':'c5fb5a0d04c946f59f0bea7df7c18565'
+    },
+     type:'GET',
+     crossDomain:true,
+     dataType:'json',   
+     success:function(data)
+     {
+        var rec = data;
+        var counter = rec["count"]
+        var temp = rec['_embedded']
+        var get_cat = temp['categories']
+        var elem1_json = get_cat[num_in]
+        var em = elem1_json['_embedded']
+        var items_in = em['items']
+        for (i =0;i<items_in.length;i++)
+        {
+            var temp_json = items_in[i]
+            var name_is = temp_json['name']
+            var price = temp_json['price']
+            console.log('chala re2',name_is,price,i);
+            addRow('dataTable',name_is,price.toString(),i.toString())
+
+        } 
+        /*if (rec["status"] ==1)
+        {
+              //localStorage.setItem("login_id", email);
+              window.location.href="submitted_vote.html";
+        }
+        else if (rec["status"] ==0)
+        {
+         alert("Invalid Passcode. Refer to your email.");
+        }
+        else if (rec["status"] ==2)
+        {
+         alert("You have already voted for this party.");
+         window.location.href="show_trump.html";
+        }*/
+     },
+     error:function(jqXHR,textStatus,errorThrown)
+     {
+        alert("Invalid Passcode. Refer to your email.");
+     }
+    });
+            }
+        </script>
+                <script type="text/javascript">
             function myFunction()
             {
                 var arr = new Array();
@@ -303,6 +375,7 @@ div.scrollmenu a:hover {
             localStorage.setItem("items", JSON.stringify(add_idt));
             console.log('chala re',name_is);
             document.getElementById("pos"+(i+1).toString()).innerHTML = name_is;
+            document.getElementById("pos"+(i+1).toString()).setAttribute("onclick","load_the_inside_menu("+i+")");
         }
         var elem1_json = get_cat[0]
         var em = elem1_json['_embedded']
@@ -314,7 +387,6 @@ div.scrollmenu a:hover {
             var price = temp_json['price']
             console.log('chala re2',name_is,price,i);
             addRow('dataTable',name_is,price.toString(),i.toString())
-
         } 
         /*if (rec["status"] ==1)
         {
