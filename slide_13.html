@@ -201,7 +201,7 @@ div.scrollmenu a:hover {
 }
     </style>
     <SCRIPT language="javascript">
-        function addRow(tableID,food_name,price_me,i) {
+        function addRow(tableID,food_name,price_me,i,offset=0) {
 
             var table = document.getElementById(tableID);
 
@@ -243,7 +243,8 @@ div.scrollmenu a:hover {
             element2.setAttribute("data-quantity","1");
             element2.setAttribute("data-price","10");
             element2.setAttribute("data-image","dumm2.jpg");*/
-            element2.dataset.id=i;
+            element2.dataset.id=offset.toString()+i.toString();
+            console.log('id is',offset.toString()+i.toString());
             element2.dataset.name=food_name;
             element2.dataset.summary="just anoather disccrip";
             element2.dataset.quantity="1";
@@ -306,7 +307,7 @@ div.scrollmenu a:hover {
             var name_is = temp_json['name']
             var price = temp_json['price']
             console.log('chala re2',name_is,price,i);
-            addRow('dataTable',name_is,price.toString(),i.toString())
+            addRow('dataTable',name_is,price.toString(),i.toString(),num_in)
 
         } 
         /*if (rec["status"] ==1)
@@ -386,7 +387,7 @@ div.scrollmenu a:hover {
             var name_is = temp_json['name']
             var price = temp_json['price']
             console.log('chala re2',name_is,price,i);
-            addRow('dataTable',name_is,price.toString(),i.toString())
+            addRow('dataTable',name_is,price.toString(),i.toString(),0)
         } 
         /*if (rec["status"] ==1)
         {
