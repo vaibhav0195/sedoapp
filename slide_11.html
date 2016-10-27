@@ -160,7 +160,7 @@
 <script type="text/javascript">
     function tip_calc(price)
     {
-        var myval = document.getElementById('amount').value;
+        var myval = document.getElementById('TotalAmout').value;
         var final_add = parseFloat(myval)+price;
         document.getElementById('show_paisa').innerHTML=final_add
     }
@@ -213,7 +213,7 @@
   <tr>
     
  
-    <td>No tip</td>
+    <td onclick="tip_calc(0)">No tip</td>
     <td onclick="tip_calc(12)">12%</td> 
     <td onclick="tip_calc(15)">15%</td>
   
