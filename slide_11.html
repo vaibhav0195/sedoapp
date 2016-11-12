@@ -161,7 +161,7 @@
     function tip_calc(price)
     {
         var myval = document.getElementById('TotalAmout').value;
-        var final_add = parseFloat(myval)+price;
+        var final_add = parseFloat(myval)+(my_val*price/100);
         document.getElementById('show_paisa').innerHTML=final_add
     }
 
@@ -171,6 +171,9 @@
     function load_body()
     {
         var o_id = localStorage.getItem("save_order_id");
+        var amount = localStorage.getItem("price");
+        console.log('sdf',amount)
+        documentgetElementById('TotalAmout').setAttribute('placeholder',amount);
         document.getElementById('OrderId').setAttribute('placeholder',o_id);
     }
 </script>

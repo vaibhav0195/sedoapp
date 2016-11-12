@@ -72,11 +72,28 @@ div.scrollmenu a:hover {
             -webkit-transform: translateZ(0px);
         }
     </style>
- 
+
+
+ <script type="text/javascript">
+    $(document).on('click', '.vaibhav_cust', function()
+{
+     // function change_screen(address="aisa")
+     // {
+              console.log('in function2')
+    localStorage.clear();
+      //var address = address;
+    var address = $(this).data('address');
+    var r_name = $(this).data('name_is');
+      localStorage.setItem("address_rest", address);
+      localStorage.setItem("name_of_rest", r_name);
+      console.log('value1',address)
+     //}
+ });
+ </script>
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <SCRIPT language="javascript">
         function addRow(tableID,address,name_disp,owner) {
-
+            var name_disp_new = name_disp;
             var table = document.getElementById(tableID);
 
             var rowCount = table.rows.length;
@@ -92,8 +109,10 @@ div.scrollmenu a:hover {
             var cell2 = row.insertCell(1);
             var element3 = document.createElement("h4");
             element3.innerHTML=address;
+            element3.dataset.address=address;
             var element5 = document.createElement("h5");
             element5.innerHTML=name_disp;
+            element5.dataset.name_is=name_disp;
             var element4 = document.createElement("h6");
             element4.innerHTML=owner;
             cell2.appendChild(element5);
@@ -103,10 +122,13 @@ div.scrollmenu a:hover {
             var cell3 = row.insertCell(2);
             var element2 = document.createElement("a");
             element2.setAttribute("href", "#popup1");
-            element2.setAttribute("class","glyphicon glyphicon-menu-right");
+            element2.setAttribute("class","glyphicon glyphicon-menu-right vaibhav_cust");
             element2.dataset.toggle="modal";
             element2.dataset.target="#popup1";
+            element2.dataset.address=owner;
+            element2.dataset.name_is=name_disp;
             //element2.innerHTML="arrow sign";
+            //element2.setAttribute("onclick","change_screen()");
             cell3.appendChild(element2);
 
 
@@ -153,7 +175,7 @@ div.scrollmenu a:hover {
    headers: { 
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-         'Api-Key':'c5fb5a0d04c946f59f0bea7df7c18565'
+         'Api-Key':'c8e0e75ec78c4f64ad5a4a823b0fa9e9'
     },
      type:'GET',
      crossDomain:true,

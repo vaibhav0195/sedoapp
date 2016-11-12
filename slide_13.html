@@ -17,50 +17,7 @@
   <script type='text/javascript' src="js/jquery.mycart.js"></script> 
     <!-- jQuery Mobile styles -->
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-  <!--script type="text/javascript">
-  $(function () {
-
-    var goToCartIcon = function($addTocartBtn){
-      var $cartIcon = $(".my-cart-icon");
-      var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
-      $addTocartBtn.prepend($image);
-      var position = $cartIcon.position();
-      $image.animate({
-        top: position.top,
-        left: position.left
-      }, 500 , "linear", function() {
-        $image.remove();
-      });
-    }
-
-    $('.my-cart-btn').myCart({
-      classCartIcon: 'my-cart-icon',
-      classCartBadge: 'my-cart-badge',
-      classProductQuantity: 'my-product-quantity',
-      classProductRemove: 'my-product-remove',
-      classCheckoutCart: 'my-cart-checkout',
-      affixCartIcon: true,
-      showCheckoutModal: true,
-      cartItems: [
-        
-      ],
-      clickOnAddToCart: function($addTocart){
-        goToCartIcon($addTocart);
-      },
-      clickOnCartIcon: function($cartIcon, products, totalPrice, totalQuantity) {
-        console.log("cart icon clicked", $cartIcon, products, totalPrice, totalQuantity);
-      },
-      checkoutCart: function(products, totalPrice, totalQuantity) {
-        console.log("checking out", products, totalPrice, totalQuantity);
-      },
-      getDiscountPrice: function(products, totalPrice, totalQuantity) {
-        console.log("calculating discount", products, totalPrice, totalQuantity);
-        return totalPrice * 0.5;
-      }
-    });
-
-  });
-  </script-->
+  
 
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
  <style>
@@ -80,7 +37,7 @@
    $(document).ready(function(){
 
  $("#final_sub").click(function(){
-    alert("JS code.");
+//    alert("JS code.");
     //var pass=document.getElementById("code").value;
     //var email=localStorage.getItem("login_id");
 //var jsonData = {"userId":email,"verificationCode":pass,"candidateId" : "57f27a0fa8543053617a9480",
@@ -93,7 +50,7 @@
    headers: { 
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-         'Api-Key':'c5fb5a0d04c946f59f0bea7df7c18565'
+         'Api-Key':'c8e0e75ec78c4f64ad5a4a823b0fa9e9'
     },
      type:'GET',
      crossDomain:true,
@@ -113,8 +70,8 @@
                 add_is = add_is + ' ' +j;
             }
             add_is = add_is+"none"
-            addRow('dataTable',add_is);
-            addRow(tableID,food_name,price_me)
+            //addRow('dataTable',add_is);
+            addRow('dataTable',food_name,price_me)
         }
         /*if (rec["status"] ==1)
         {
@@ -232,11 +189,15 @@ div.scrollmenu a:hover {
             var cell3 = row.insertCell(2);
             var element2 = document.createElement("button");
             var element8 = document.createElement("h6");
-            element8.innerHTML=price_me;
+            element8.innerHTML="$"+price_me;
             element8.style.marginLeft="40px";
             element2.style.marginLeft="40px";
-            element2.setAttribute("class","btn btn-danger my-cart-btn");
+            element2.setAttribute("class","btn btn-danger my-cart-btn like-btn");
             element2.setAttribute("id","vai");
+            var newSpan = document.createElement('span');
+            newSpan.setAttribute("class","badge like-badge");
+            newSpan.innerHTML=0;
+
             /*element2.setAttribute("data-id","2");
             element2.setAttribute("data-name","New_food");
             element2.setAttribute("data-summary","Descriptiom_new");
@@ -254,12 +215,25 @@ div.scrollmenu a:hover {
             //element2.setAttribute("background-color","#ffffff");
             //element2.setAttribute("color","green");
             element2.innerHTML="ADD";
+            element2.appendChild(newSpan);
             cell3.appendChild(element8);
             cell3.appendChild(element2);
 
 
 
         }</SCRIPT>
+        <script type="text/javascript">
+            $(document).on("click", ".like-btn", function(e) {
+    e.preventDefault();
+
+    var $badge = $(this).find('.badge'),
+        count = Number($badge.text());
+
+    //$label.text(active ? 'Like' : 'Liked');
+    $badge.text(count + 1);
+    $(this).toggleClass('active');
+});
+        </script>
         <script type="text/javascript">
             function load_the_inside_menu(number)
             {
@@ -282,12 +256,12 @@ div.scrollmenu a:hover {
             function load_the_inside_list(num_in)
             {
                    $.ajax({
-     url:"https://api.omnivore.io/0.1/locations/GTzLqzMT/menu/categories",
+     url:"https://api.omnivore.io/0.1/locations/ATeMz49T/menu/categories",
      //data: JSON.stringify(jsonData),
    headers: { 
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-         'Api-Key':'c5fb5a0d04c946f59f0bea7df7c18565'
+         'Api-Key':'c8e0e75ec78c4f64ad5a4a823b0fa9e9'
     },
      type:'GET',
      crossDomain:true,
@@ -332,9 +306,15 @@ div.scrollmenu a:hover {
     });
             }
         </script>
+
                 <script type="text/javascript">
             function myFunction()
             {
+                var adr = localStorage.getItem("address_rest");
+                var nmae = localStorage.getItem("name_of_rest");
+                console.log('chala re',adr);
+                document.getElementById("addrest").innerHTML = adr;
+                document.getElementById("namerest").innerHTML = nmae;
                 var arr = new Array();
                 var arr2 = new Array();
                 localStorage.clear();
@@ -349,12 +329,12 @@ div.scrollmenu a:hover {
             function load_the_list()
             {
                    $.ajax({
-     url:"https://api.omnivore.io/0.1/locations/GTzLqzMT/menu/categories",
+     url:"https://api.omnivore.io/0.1/locations/ATeMz49T/menu/categories",
      //data: JSON.stringify(jsonData),
    headers: { 
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-         'Api-Key':'c5fb5a0d04c946f59f0bea7df7c18565'
+         'Api-Key':'c8e0e75ec78c4f64ad5a4a823b0fa9e9'
     },
      type:'GET',
      crossDomain:true,
@@ -419,8 +399,8 @@ div.scrollmenu a:hover {
       <img src="dumm2.jpg" class="img-responsive" alt="" />
       
       <h2> <span>Arrow</span></h2>
-      <h2 style="top:10%"> <span>Name of restrau</span></h2>
-      <h2 style="top:15%"> <span>Address of it</span></h2>
+      <h2 style="top:10%"> <span id='namerest'>Name of restrau</span></h2>
+      <h2 style="top:15%"> <span id='addrest'>Address of it</span></h2>
 </div>
 </div>
 <div class="row">
@@ -496,7 +476,7 @@ div.scrollmenu a:hover {
       }
     });
    var goToCartIcon = function($addTocartBtn){
-        alert('Pejhla kaam');
+       // alert('Pejhla kaam');
       var $cartIcon = $(".my-cart-icon");
       var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
       $addTocartBtn.prepend($image);
