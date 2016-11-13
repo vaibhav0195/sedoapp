@@ -321,8 +321,14 @@
 
     $("." + classCheckoutCart).click(function(){
       var products = ProductManager.getAllProducts();
+      var money12 = ProductManager.getTotalPrice();
+      //localStorage.clear();
+      var price = options.getDiscountPrice(ProductManager.getAllProducts(), ProductManager.getTotalPrice(), ProductManager.getTotalQuantity());
+      console.log('hogya chupe',products);
+      localStorage.setItem("price", money12);
+      console.log('hogya chupe 2',localStorage.getItem("price"));
       if(!products.length) {
-        $("#" + idEmptyCartMessage).fadeTo('fast', 0.5).fadeTo('fast', 1.0);
+       window.location.href="slide_16.html"
         return ;
       }
       updateCart();
