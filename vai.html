@@ -169,7 +169,15 @@ div.scrollmenu a:hover {
   // "votingPhase" :"1"}
 ;
   // var jsonData = '{"password':/"test/",/"userId/":/"vote/"}'
-   $.ajax({
+
+                 });
+  }); 
+</script>
+
+<script type="text/javascript">
+  function my1()
+  {
+       $.ajax({
      url:"https://api.omnivore.io/0.1/locations",
      //data: JSON.stringify(jsonData),
    headers: { 
@@ -225,11 +233,8 @@ div.scrollmenu a:hover {
         alert("Invalid Passcode. Refer to your email.");
      }
     });
-                 });
-  }); 
+  }
 </script>
-
-
     <script type="text/javascript">
         $(document).one('mobileinit', function () {
  
@@ -244,7 +249,7 @@ div.scrollmenu a:hover {
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
  
 </head>
-<body>
+<body onload="my1();">
 <div class='row'>
     <div class='col-md-12'> <h3 style='text-align: center;background-color: #F3EEED;color:black'>Restaurants</h3></div>
 </div>
@@ -261,7 +266,7 @@ div.scrollmenu a:hover {
         </TABLE>
         </div>
     </div>
-<button type="button" value="Add Row" onclick="window.location.href='vai.html';">Test</button> 
+<!--button type="button" value="Add Row" id="final_sub">Test</button--> 
 <div class="row">
 <div class="scrollmenu">
   <a href="#" style="color:white;margin-left:50px">Restaurant</a>
