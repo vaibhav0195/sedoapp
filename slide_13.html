@@ -32,7 +32,9 @@
     z-index: 999;
   }
   </style>
-
+<script type="text/javascript">
+    var jsong = {};
+</script>
    <script type="text/javascript">
    $(document).ready(function(){
 
@@ -196,8 +198,15 @@ div.scrollmenu a:hover {
             element2.setAttribute("id","vai");
             var newSpan = document.createElement('span');
             newSpan.setAttribute("class","badge like-badge");
+            newSpan.dataset.id=offset.toString()+i.toString();
+            if(jsong.hasOwnProperty(offset.toString()+i.toString()))
+            {
+                newSpan.innerHTML = jsong[offset.toString()+i.toString()];
+            }
+            else
+            {    
             newSpan.innerHTML=0;
-
+            }
             /*element2.setAttribute("data-id","2");
             element2.setAttribute("data-name","New_food");
             element2.setAttribute("data-summary","Descriptiom_new");
@@ -228,9 +237,10 @@ div.scrollmenu a:hover {
 
     var $badge = $(this).find('.badge'),
         count = Number($badge.text());
-
+    var id = $(this).data('id')
     //$label.text(active ? 'Like' : 'Liked');
     $badge.text(count + 1);
+    jsong[id] = count+1;
     $(this).toggleClass('active');
 });
         </script>

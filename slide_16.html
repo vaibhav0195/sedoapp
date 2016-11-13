@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scrollable Content Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!--link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" style="width:30%;height:15%;padding:0%;margin-left: 0px;margin-right: 0px"-->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+  <script type='text/javascript' src="js/jquery.mycart.js"></script> 
+    <!-- jQuery Mobile styles -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <!-- Fix for scrolling on iOS prior to iOS 6 -->
+    
+ 
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<SCRIPT language="javascript">
+        function add_row(tableID,food_name,id,price_me,i) {
+
+            var table = document.getElementById(tableID);
+
+            //var rowCount = table.rows.length;
+            var row = table.insertRow(i);
+
+            // var cell1 = row.insertCell(0);
+            // var element1 = document.createElement("img");
+            // element1.setAttribute("src", "dumm2.jpg"); 
+            // element1.setAttribute("class", "img-responsive");style="height:10%;width:50%;margin-left:30px"
+            // //element1.setAttribute("width", "40%");
+            // element1.style.height="10%";
+            // element1.style.width="50%";
+            // element1.style.marginLeft="30px";
+            // cell1.appendChild(element1);
+
+            var  cell2= row.insertCell(0);
+            var element3 = document.createElement("p");
+            element3.innerHTML=food_name;
+            var element5 = document.createElement("div");
+            element5.setAttribute("class","row");
+            
+            var element_min = document.createElement("span");
+            var element_text = document.createElement("span");
+            var element_plus = document.createElement("span");
+            element_plus.setAttribute("class","glyphicon glyphicon-plus col-sm-4 countup-btn");
+            element_min.setAttribute("class","glyphicon glyphicon-minus col-sm-4 countd-btn");
+            element_text.setAttribute("class","col-sm-4 badge like-badge "+id);
+            element_text.innerHTML=1;
+            //element_text.dataset.id=id;
+            element_text.dataset.value=1;
+            element_plus.dataset.id=id;
+            element_plus.dataset.value=1;
+            element_min.dataset.id=id+'-min';
+            element_min.dataset.value=1;
+            element_plus.dataset.price = price_me;
+            element_min.dataset.price = price_me;
+            element11 = document.createElement("h6")
+            element11.innerHTML = "x"+price_me; 
+            //element_min.appendChild(element_text);
+            //element_plus.appendChild(element_text);
+            element5.appendChild(element_min);
+            element5.appendChild(element_text);
+            element5.appendChild(element_plus);
+            // element5.innerHTML=food_name;
+            //var element4 = document.createElement("h6");
+            //element4.innerHTML="speciality";
+            cell2.appendChild(element3);
+            cell2.appendChild(element5);
+            cell2.appendChild(element11)
+            //cell2.appendChild(element4);
+
+            var cell3 = row.insertCell(1);
+            //var element2 = document.createElement("button");
+            var element8 = document.createElement("h6");
+            element8.innerHTML="$"+price_me;
+            element8.setAttribute('class',"total "+id);
+            element8.style.marginLeft="40px";
+            //element2.style.marginLeft="40px";
+            //element2.setAttribute("class","btn btn-danger my-cart-btn like-btn");
+            //element2.setAttribute("id","vai");
+            // var newSpan = document.createElement('span');
+            // newSpan.setAttribute("class","badge like-badge");
+            // newSpan.dataset.id=offset.toString()+i.toString();
+            // if(jsong.hasOwnProperty(offset.toString()+i.toString()))
+            // {
+            //     newSpan.innerHTML = jsong[offset.toString()+i.toString()];
+            // }
+            // else
+            // {    
+            // newSpan.innerHTML=0;
+            // }
+            /*element2.setAttribute("data-id","2");
+            element2.setAttribute("data-name","New_food");
+            element2.setAttribute("data-summary","Descriptiom_new");
+            element2.setAttribute("data-quantity","1");
+            element2.setAttribute("data-price","10");
+            element2.setAttribute("data-image","dumm2.jpg");*/
+            //element2.dataset.id=id;
+            //console.log('id is',offset.toString()+i.toString());
+            //element2.dataset.name=food_name;
+            //element2.dataset.summary="just anoather disccrip";
+            //////element2.dataset.quantity="1";
+            //element2.dataset.price=price_me;
+            //element2.dataset.image="dumm2.jpg";
+            //element2.setAttribute("border-color","green");
+            //element2.setAttribute("background-color","#ffffff");
+            //element2.setAttribute("color","green");
+            //element2.innerHTML="ADD";
+            //element2.appendChild(newSpan);
+            cell3.appendChild(element8);
+            //cell3.appendChild(element2);
+
+
+
+        }</SCRIPT>
+        
+<script type="text/javascript">
+  function showhide(val)
+ {
+       var div = document.getElementById("newpost");
+if (val == 1) {
+    div.style.display = "none";
+}
+else {
+    div.style.display = "block";
+}
+ }
+</script>
+
+    <script type="text/javascript">
+        $(document).one('mobileinit', function () {
+ 
+            // Setting #container div as a jqm pageContainer
+            $.mobile.pageContainer = $('#container');
+ 
+            // Setting default page transition to slide
+            $.mobile.defaultPageTransition = 'slide';
+ 
+        });
+    </script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<script type="text/javascript">
+    function tip_calc(price)
+    {
+        sum = 0
+        var targetDiv = document.getElementsByClassName("total");
+        for (i in targetDiv)
+        {
+          var val = targetDiv[i].innerHTML;
+          if (val != undefined)
+          {
+          sum=sum+Number(val.split('$')[1]);
+          }
+        }
+        var targetDiv2 = document.getElementsByClassName("showing_it")[0];
+        targetDiv2.innerHTML = sum+(sum*price/100);
+        var targetDiv23 = document.getElementsByClassName("show2")[0];
+        targetDiv23.innerHTML=sum+(sum*price/100);
+        var myval = document.getElementById('TotalAmout').value;
+        var final_add = parseFloat(myval)+(my_val*price/100);
+        document.getElementById('show_paisa').innerHTML=final_add
+    }
+
+</script>
+ <script type="text/javascript">
+            $(document).on("click", ".countup-btn", function(e) {
+    e.preventDefault();
+    var values = $(this).data('value');
+    var id = $(this).data('id');
+    var price3 = $(this).data('price');
+    console.log('values',values+1,id+'-min');
+    var data2= document.getElementById(id+'-min');
+    $('#'+id+'-min').data('value', values+1);
+    var targetDiv = document.getElementsByClassName(id)[0];
+    targetDiv.innerHTML = values+1;
+    var targetDiv2 = document.getElementsByClassName(id)[1];
+    var fit_val = (values+1) * price3;
+    targetDiv2.innerHTML = "$"+fit_val;
+    sum = 0
+        var targetDiv = document.getElementsByClassName("total");
+        for (i in targetDiv)
+        {
+          var val = targetDiv[i].innerHTML;
+          if (val != undefined)
+          {
+          sum=sum+Number(val.split('$')[1]);
+          }
+        }
+        var targetDiv2 = document.getElementsByClassName("showing_it")[0];
+        targetDiv2.innerHTML = sum;
+        var targetDiv23 = document.getElementsByClassName("show2")[0];
+        targetDiv23.innerHTML=sum;
+     $(this).data('value', values+1);
+    $(this).toggleClass('active');
+});
+        </script>
+ <script type="text/javascript">
+            $(document).on("click", ".countd-btn", function(e) {
+    e.preventDefault();
+    //var values = $(this).data('value');
+    var id = $(this).data('id');
+    var arr = id.split('-')
+    var idp = arr[0]
+    var temp = '#'+idp
+    //var values = $(temp).data('value')
+    console.log('valuesd',values,idp);
+
+    if(values > 1){
+    console.log('values',values+1,id);
+    var price3 = $(this).data('price');
+    var data2= document.getElementById(idp);
+    $(temp).data('value', values-1);
+    var targetDiv = document.getElementsByClassName(idp)[0];
+    targetDiv.innerHTML = values-1;
+    var targetDiv2 = document.getElementsByClassName(idp)[1];
+    var fit_val = (values-1) * price3;
+    targetDiv2.innerHTML = "$"+fit_val;
+    sum = 0
+        var targetDiv = document.getElementsByClassName("total");
+        for (i in targetDiv)
+        {
+          var val = targetDiv[i].innerHTML;
+          if (val != undefined)
+          {
+          sum=sum+Number(val.split('$')[1]);
+          }
+        }
+        var targetDiv2 = document.getElementsByClassName("showing_it")[0];
+        targetDiv2.innerHTML = sum;
+        var targetDiv23 = document.getElementsByClassName("show2")[0];
+        targetDiv23.innerHTML=sum;
+     $(this).data('value', values-1);
+    $(this).toggleClass('active');
+  }
+});
+        </script>
+
+<script type="text/javascript">
+    // function update_value(id)
+    // {
+    //   var s = document.getElementById(id);
+    //   console.log('s',s)
+    //   var value = Number(s.data['value']);
+    //   value = value+1;
+    //   S.text(value);
+    // }
+
+
+    function load_body()
+    {
+        var cart_check = JSON.parse(localStorage.getItem("items"));
+        console.log(cart_check)
+        var length_arr = cart_check.length;
+        var flag = new Array();
+        var counter =0 
+        for(i=0;i<length_arr;i++)
+        {
+          var temp_json = cart_check[i];
+          var price = temp_json['price'];
+          var name = temp_json['name'];
+          var id = temp_json['id'];
+          var cflag =0
+          console.log('me',price,id,name)
+          if (id === undefined)
+            { cflag=1;}
+          if (i==0)
+            { cflag=1;}
+          if (flag.indexOf(id) > -1)
+          {
+            //id is present update hte count
+            
+            //update_value(id);
+
+          }
+          else
+          {
+            //add the item to the table item is occured the first time
+            if(cflag==0 )
+            {  
+            flag.push(id);
+            add_row('dataTable',name,id,price,counter);
+            counter = counter+1;
+            }
+          }
+        }
+        sum = 0
+        var targetDiv = document.getElementsByClassName("total");
+        for (i in targetDiv)
+        {
+          var val = targetDiv[i].innerHTML;
+          if (val != undefined)
+          {
+          sum=sum+Number(val.split('$')[1]);
+          }
+        }
+        var targetDiv2 = document.getElementsByClassName("showing_it")[0];
+        var targetDiv23 = document.getElementsByClassName("show2")[0];
+        targetDiv23.innerHTML=sum;
+        targetDiv2.innerHTML = sum;
+        
+    }
+</script>
+ 
+</head>
+<body class="container" onload="load_body()">
+<div class="container">
+<div class='row' >
+    <div class="col-sm-4 col-xs-6" style="margin-top: 20px;margin-left: 8px;">
+      <button type = "button" style="color:white;background-color:#b5252e;font-weight:bold;font-size:14px; padding-bottom: 40px; border-top-width: 10px; border-bottom-width: 10px;vertical-align: middle;border-color:#b5252e;" class = "btn  btn-lg form-control color:white;background-color:red" onclick="showhide(0)">
+      SitDown
+   </button>
+   <!--input type="submit"  value=" Create Account " style="color:white;background-color:red;" class = "btn  btn-lg form-control"-->
+   </div>
+   <div class="col-sm-4 col-xs-6" style="margin-top: 20px;margin-left: -15px;">
+      <button type = "button" style="color:white;background-color:#b5252e;font-weight:bold;font-size:14px; padding-bottom: 40px; border-top-width: 10px; border-bottom-width: 10px;border-color:#b5252e;" class = "btn  btn-lg form-control color:white;background-color:red" data-toggle="modal" data-target="#project69" onclick="showhide(1)">
+      Take Out
+   </button>
+   <!--input type="submit"  value=" Create Account " style="color:white;background-color:red;" class = "btn  btn-lg form-control"-->
+   </div>
+</div>
+    <div data-role="content" class="scrollable">
+<!--INPUT type="button" value="Add Row" onclick="addRow('dataTable')"-->
+        <table id="dataTable" data-role="listview" style="border-spacing: 0px;border-collapse: collapse;padding:0% ">
+              <col width="130">
+            <col width="80">
+            <!--tr  >
+                
+                <td style="margin:-1px"> <img src="dumm2.jpg"  class="img-responsive" style="height:10%;width:50%;margin-left:30px" alt="Smiley face" ></td>
+                <td style="margin-left:-25px">
+                    <h5>Food1</h5>
+                    <p>Descriptiom</p>
+                    </td>
+                    <td>
+                    <h6 style="margin-left: 40px"><strong>$50</strong></h6>
+                    <button class="btn btn-danger my-cart-btn" data-id="1" id="vai" data-name="Food1" data-summary="Description" data-price="50" data-quantity="1" data-image="dumm2.jpg" style="margin-left: 40px">ADD</button></td>
+            </tr-->
+            <!--button class="btn btn-danger my-cart-btn" data-id="3" data-name="Food1" data-summary="Description" data-price="50" data-quantity="1" data-image="dumm2.jpg" style="margin-left: 40px">ADD</button-->
+        </table>
+</div>
+
+      <div class = "row">
+    
+    <div class="col-md-4">
+        
+        <h6  style="text-align: left;margin-top:20px;padding: 0px;margin-left: 0px;margin-right: 0px" >Total Amount</h6>
+    </div>
+        <div class="col-d-4"></div>
+    <div class="col-md-4 showing_it" style="text-align: right" id="show_paisa">
+    <h6 >Paisa!</h6>
+    </div>
+        
+   </div>
+   <div id="newpost">
+   <table style="width:100%;" border="1">
+  <tr>
+    
+ 
+    <td onclick="tip_calc(0)">No tip</td>
+    <td onclick="tip_calc(12)">12%</td> 
+    <td onclick="tip_calc(15)">15%</td>
+  
+    <td onclick="tip_calc(18)"> 18%</td>
+    <td onclick="tip_calc(20)">20%</td>
+
+  </tr>
+</table>
+</div>
+    <div class="row">
+        <div class="col-md-4">
+            <p >Tax</p>
+        </div>
+        <div class="col-md-4">
+            <p style="text-align:right">$2</p>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 ">
+            <p >Total</p>
+        </div>
+        <div class="col-md-4">
+            <p class="show2" style="text-align:right">$2</p>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+<div class="col-md-12 img-responsive" style="margin-top: 20px;">
+    <button type = "button" id="my_btn" style="color:white;background-color:#b5252e;font-weight:bold;font-size:14px;padding-top: 5px; padding-bottom: 20px; border-top-width: 10px; border-bottom-width: 10px;border-color:#b5252e;" class = "btn  btn-lg form-control color:white;background-color:red">
+      Make Payment
+   </button>
+   <!--input type="submit"  value=" Create Account " style="color:white;background-color:red;" class = "btn  btn-lg form-control"-->
+   </div>
+</div>
+</body>
+</html>

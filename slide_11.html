@@ -171,8 +171,8 @@
     function load_body()
     {
         var o_id = localStorage.getItem("save_order_id");
-        var amount = localStorage.getItem("price");
-        console.log('sdf',amount)
+        var amount = Number(localStorage.getItem("price"));
+        console.log('sdf',amount);
         documentgetElementById('TotalAmout').setAttribute('placeholder',amount);
         document.getElementById('OrderId').setAttribute('placeholder',o_id);
     }
